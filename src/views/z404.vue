@@ -1,5 +1,7 @@
 <template>
-  <div class="home"></div>
+  <div class="home">
+    404页面
+  </div>
 </template>
 <script>
 import { reactive, toRefs } from 'vue'
