@@ -18,12 +18,12 @@ export default {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   min-height: 100vh;
-  .top{
+  .top {
     text-align: center;
     font-size: 30px;
     padding-top: 30px;
   }
-  .nav{
+  .nav {
     width: 1200px;
     margin: 0 auto;
     font-size: 20px;

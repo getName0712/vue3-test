@@ -6,21 +6,21 @@
         <el-carousel interval="1000">
           <el-carousel-item v-for="(item, index) in focus" :key="index">
             <!-- <h3>{{ index }}</h3> -->
-            <img :src="item.pic_info.url" alt="" />
+            <img :src="item.pic_info.url" alt />
           </el-carousel-item>
         </el-carousel>
       </div>
       <div style="margin-top:50px">歌单推荐</div>
       <div class="song">
         <el-carousel indicator-position="outside">
-          <el-carousel-item v-for="item in song " :key="item">
+          <el-carousel-item v-for="item in song" :key="item">
             <div class="flex">
-              <div class="song_card" v-for="val in item " :key="val">
-                <img :src="val.imgurl" alt="" />
+              <div v-for="val in item" :key="val" class="song_card">
+                <img :src="val.imgurl" alt />
                 <div class="song_name">
-                  <a href="javascript:">{{val.dissname}}</a>
+                  <a href="javascript:">{{ val.dissname }}</a>
                 </div>
-                <div class="song_num">播放量  {{val.listennum}}</div>
+                <div class="song_num">播放量 {{ tranNumber(val.listennum, 1) }}</div>
               </div>
             </div>
           </el-carousel-item>
@@ -28,10 +28,10 @@
       </div>
       <div style="margin-top:50px">音乐排行榜</div>
       <div class="pai_con">
-        <div class="icon" v-for="item in topList.splice(0, 4)" :key="item">
+        <div v-for="item in topList.splice(0, 4)" :key="item" class="icon">
           <div class="top">{{ item.topTitle }}</div>
-          <i class="el-icon-minus"></i>
-          <div class="context " v-for="val in item.songList" :key="val">
+          <i class="el-icon-minus" />
+          <div v-for="val in item.songList" :key="val" class="context">
             <div class="yi">{{ val.songname }}</div>
             <div style="font-size:16px" class="yi">{{ val.singername }}</div>
           </div>
@@ -57,7 +57,7 @@ export default {
     onMounted(() => {})
     // 排行榜
     const getTop = () => {
-      getTopLists().then(res => {
+      getTopLists().then((res) => {
         console.log(res)
         console.log('排行榜')
         state.topList = res.response.data.topList
@@ -66,7 +66,7 @@ export default {
     getTop()
     // 歌单列表
     const getLists = () => {
-      getSongLists().then(res => {
+      getSongLists().then((res) => {
         console.log(res)
         console.log('歌单列表')
         // state.song = res.response.data.list
@@ -78,21 +78,45 @@ export default {
         state.song = totalPage
       })
     }
+    // 数据转换 point保留几位数
+    const tranNumber = (num, point) => {
+      const numStr = num.toString()
+      // 十万以内直接返回
+      if (numStr.length < 6) {
+        return numStr
+      } else if (numStr.length > 8) {
+        // 大于8位数是亿
+        const decimal = numStr.substring(
+          numStr.length - 8,
+          numStr.length - 8 + point
+        )
+        return parseFloat(parseInt(num / 100000000) + '.' + decimal) + '亿'
+      } else if (numStr.length > 5) {
+        // 大于6位数是十万 (以10W分割 10W以下全部显示)
+        const decimal = numStr.substring(
+          numStr.length - 4,
+          numStr.length - 4 + point
+        )
+        return parseFloat(parseInt(num / 10000) + '.' + decimal) + '万'
+      }
+    }
     getLists()
     // 首页推荐
     const getRec = () => {
-      getRecommend().then(res => {
+      getRecommend().then((res) => {
         console.log(res)
         console.log('首页推荐')
         state.focus = res.response.focus.data.content
       })
     }
+    // 过滤器
     getRec()
     return {
       ...toRefs(state),
       getLists,
       getRec,
-      getTop
+      getTop,
+      tranNumber
     }
   }
 }
