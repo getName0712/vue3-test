@@ -21,6 +21,11 @@ const routes = [
     path: '/qqmusic',
     name: 'Qqmusic',
     component: () => import(/* webpackChunkName: "about" */ '../views/qqmusic.vue')
+  },
+  {
+    path: '/qqplay/:disstid',
+    name: 'qqplay',
+    component: () => import(/* webpackChunkName: "about" */ '../views/qqplay.vue')
   }
 ]
 

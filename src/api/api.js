@@ -13,3 +13,5 @@ export const getSongLists = p => get(url.qqapi + '/getSongLists', p)
 export const getRecommend = p => get(url.qqapi + '/getRecommend', p)
 // 排行榜单列表
 export const getTopLists = p => get(url.qqapi + '/getTopLists', p)
+// 排行榜单列表
+export const getSongListDetail = p => get(url.qqapi + '/getSongListDetail', p)

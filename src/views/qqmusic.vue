@@ -16,11 +16,13 @@
           <el-carousel-item v-for="item in song" :key="item">
             <div class="flex">
               <div v-for="val in item" :key="val" class="song_card">
-                <img :src="val.imgurl" alt />
+                <img :src="val.imgurl" alt @click="songDetail(val.dissid)" />
                 <div class="song_name">
                   <a href="javascript:">{{ val.dissname }}</a>
                 </div>
-                <div class="song_num">播放量 {{ tranNumber(val.listennum, 1) }}</div>
+                <div class="song_num">
+                  播放量 {{ tranNumber(val.listennum, 1) }}
+                </div>
               </div>
             </div>
           </el-carousel-item>
@@ -44,11 +46,13 @@
 import { reactive, toRefs, onMounted } from 'vue'
 import { getSongLists, getRecommend, getTopLists } from '@/api/api.js'
 // import { useStore } from 'vuex'
-// useStore == vuex
+// useStore == vuex   useRouter == router
+import { useRouter } from 'vue-router'
 export default {
   components: {},
   setup () {
     console.log(11)
+    const route = useRouter()
     const state = reactive({
       focus: '',
       topList: [],
@@ -57,16 +61,22 @@ export default {
     onMounted(() => {})
     // 排行榜
     const getTop = () => {
-      getTopLists().then((res) => {
+      getTopLists().then(res => {
         console.log(res)
         console.log('排行榜')
         state.topList = res.response.data.topList
       })
     }
+    //  路由跳转
+    const songDetail = disstid => {
+      console.log(disstid)
+      // route.push({ path: '/qqplay', query: { disstid } })
+      route.push({ path: `/qqplay/${disstid} ` })
+    }
     getTop()
     // 歌单列表
     const getLists = () => {
-      getSongLists().then((res) => {
+      getSongLists().then(res => {
         console.log(res)
         console.log('歌单列表')
         // state.song = res.response.data.list
@@ -103,7 +113,7 @@ export default {
     getLists()
     // 首页推荐
     const getRec = () => {
-      getRecommend().then((res) => {
+      getRecommend().then(res => {
         console.log(res)
         console.log('首页推荐')
         state.focus = res.response.focus.data.content
@@ -116,7 +126,8 @@ export default {
       getLists,
       getRec,
       getTop,
-      tranNumber
+      tranNumber,
+      songDetail
     }
   }
 }
