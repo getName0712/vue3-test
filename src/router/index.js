@@ -15,17 +15,22 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import('../views/About.vue')
   },
   {
     path: '/qqmusic',
     name: 'Qqmusic',
-    component: () => import(/* webpackChunkName: "about" */ '../views/qqmusic.vue')
+    component: () => import('../views/qqmusic.vue')
   },
   {
-    path: '/qqplay/:disstid',
-    name: 'qqplay',
-    component: () => import(/* webpackChunkName: "about" */ '../views/qqplay.vue')
+    path: '/qqsongsheet/:disstid',
+    name: 'qqsongsheet',
+    component: () => import('../views/qqsongsheet.vue')
+  },
+  {
+    path: '/map',
+    name: 'map',
+    component: () => import('../views/map.vue')
   }
 ]
 

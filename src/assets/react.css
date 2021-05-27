@@ -14,6 +14,10 @@ a {
     color: rgb(26, 23, 23);
     background: none
 }
+a:hover{
+    color: rgb(138, 211, 128); 
+    cursor: pointer;
+}
 
 /* 滚动条样式 */
 ::-webkit-scrollbar {

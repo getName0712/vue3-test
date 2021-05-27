@@ -3,6 +3,7 @@
     <div class="top">导航栏</div>
     <div class="nav">
       <router-link to="/qqmusic">QQ音乐</router-link>
+      <router-link to="/map">地图</router-link>
     </div>
   </div>
 </template>

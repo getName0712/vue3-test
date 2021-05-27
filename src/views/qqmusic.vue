@@ -71,7 +71,7 @@ export default {
     const songDetail = disstid => {
       console.log(disstid)
       // route.push({ path: '/qqplay', query: { disstid } })
-      route.push({ path: `/qqplay/${disstid} ` })
+      route.push({ path: `/qqsongsheet/${disstid} ` })
     }
     getTop()
     // 歌单列表

@@ -1,4 +1,8 @@
 module.exports = {
+  publicPath: './', // 基本路径
+  outputDir: 'dist', // 输出文件目录
+  assetsDir: 'static', // 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
+
   lintOnSave: false, // 设置eslint报错时停止代码编译
   productionSourceMap: false, // 不需要生产环境的 source map（减小dist文件大小，加速构建）
   devServer: {
